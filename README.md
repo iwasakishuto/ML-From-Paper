@@ -1,5 +1,5 @@
 # ML-From-Paper
-#### ~Build and implement ML models from papers.~
+#### \~Build and implement ML models from papers.\~
 
 ## Papers
 論文は大体 <b>[Papers With Code](https://paperswithcode.com)</b> から state-of-the-art のものを探してきている。
