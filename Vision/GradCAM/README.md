@@ -16,3 +16,9 @@
 5. これに、特徴マップをかけ、ReLUを通す(これによって、重要なところだけしか残さない)ことで、ヒートマップを作ることが可能。
 
 <div style="text-align: center;"><a href="https://www.codecogs.com/eqnedit.php?latex=$$&space;L_{\mathrm{Grad}&space;\mathrm{CAM}}^{c}=\operatorname{ReLU}\left(\sum_{k}&space;\alpha_{k}^{c}&space;A^{k}\right)&space;$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$$&space;L_{\mathrm{Grad}&space;\mathrm{CAM}}^{c}=\operatorname{ReLU}\left(\sum_{k}&space;\alpha_{k}^{c}&space;A^{k}\right)&space;$$" title="$$ L_{\mathrm{Grad} \mathrm{CAM}}^{c}=\operatorname{ReLU}\left(\sum_{k} \alpha_{k}^{c} A^{k}\right) $$" /></a></div>
+
+## How to use?
+```sh
+# sample
+python GradCAM.py --input_path ./img/American_egret.png
+```
