@@ -15,11 +15,13 @@ Given a pair of images as input, this network model outputs a similarity value i
   - Computes differences in feature values across the two views around a <b>neighborhood</b> of each feature location.
   - The motivation behind taking differences in a neighborhood is to add robustness to positional differences in corresponding features of the two input images.
   - Pass these neighborhood difference maps through a rectified linear unit(ReLu).
-  <img src="./img/Cross-Input.png">
+  <img src="./img/Cross-Input.png" width="50%" alt="Cross-Input">
+
 3. Patch Summary Features
   - Summarizes these neighborhood difference maps by producing a holistic representation of the differences in each 5 × 5 block.
   - This is accomplished by convolving K with 25 filters of size 5 × 5 × 25, with a stride of 5.
-  <img src="./img/Patch-Summary.png">
+  <img src="./img/Patch-Summary.png" width="50%" alt="Patch-Summary">
+  
 4. Across-Patch Features
   - Learn spatial relationships across neighborhood differences.
   - This is done by convolving L with 25 filters of size 3 × 3 × 25 with stride of 1.
