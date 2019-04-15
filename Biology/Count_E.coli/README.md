@@ -1,5 +1,5 @@
 # E.coil's Counter
-Lat week, I cultured E.coil and counted them. It was very boring and hard time for me to count too small and many colonies. Tha's why I applied Machine Learning and made "E.coil's Counter."
+Last week, I cultured E.coil and counted them. It was very boring and hard time for me to count too small and many colonies. Tha's why I applied Machine Learning and made "E.coil's Counter."
 
 <img src="./img/E.coil.png">
 
@@ -24,11 +24,22 @@ If we use a global value as threshold value, it will be strongly influenced by t
 | 11         | 57                 |<img src="./img/th-57-E.coil.png">       |
 | 13         | 77                 |<img src="./img/th-77-E.coil.png">       |
 | 15         | 85                 |<img src="./img/th-85-E.coil.png">       |
-There is no meaning about colors.
+
+There is no meaning about colors.
+
+### How to use?
+
+```sh
+$ python Count-by-threshold.py \
+--input_path img/E.coil.png \
+--output_path img/{}-means-{}-E.coil.png \
+--Block_size 9 \
+--C 2
+```
 
 ## Approach 2: K-means
 Apply image segmentation by K-means to distinguish the E.coil's region or not.
-1. Examine E.coil's color(BGR) in the image (I used "Digital Color Meter.").
+1. Examine E.coil's color(BGR) in the image (I used [Digital Color Meter](https://support.apple.com/guide/digital-color-meter/welcome/mac)).
 2. Apply K-means segmentation to the image.
 3. Change the cluster's color closest to the E.colis' to white, and the others' to black.
 4. Distinguish E.coils or not.
@@ -43,8 +54,12 @@ Apply image segmentation by K-means to distinguish the E.coil's region or not.
 
 ## How to use?
 
-```
-git clone 
+```sh
+$ python Count-by-K-means.py img/E.coil.png \
+--input_path img/E.coil.png \
+--output_path img/{}-means-{}-E.coil.png \
+--K 15 \
+--RGB 222.219.203
 ```
 
 ## Reference
