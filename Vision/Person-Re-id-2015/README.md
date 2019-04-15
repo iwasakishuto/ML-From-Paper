@@ -21,7 +21,7 @@ Given a pair of images as input, this network model outputs a similarity value i
   - Summarizes these neighborhood difference maps by producing a holistic representation of the differences in each 5 × 5 block.
   - This is accomplished by convolving K with 25 filters of size 5 × 5 × 25, with a stride of 5.
   <img src="./img/Patch-Summary.png" width="50%" alt="Patch-Summary">
-  
+
 4. Across-Patch Features
   - Learn spatial relationships across neighborhood differences.
   - This is done by convolving L with 25 filters of size 3 × 3 × 25 with stride of 1.
@@ -34,3 +34,4 @@ Given a pair of images as input, this network model outputs a similarity value i
 
 ## The model structure
 <img src="./img/model_structure.png">
+<img src="./img/model.png">
