@@ -5,6 +5,24 @@ Identifying people across images that have been taken using different camera, or
 ## Papers
 - [An improved deep learning architecture for person re-identification](https://ieeexplore.ieee.org/abstract/document/7299016)
 
+## The model structure
+<img src="./img/model-for-visualize.png">
+
+<table border="da">
+  <thead>
+    <tr>
+      <th>For Learning</th>
+      <th>For GradCAM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="./img/model-for-learning.png"></td>
+      <td><img src="./img/model-for-GradCAM.png"></td>
+    </tr>
+  </tbody>
+</table>
+
 ## Overview
 Given a pair of images as input, this network model outputs a similarity value indicating whether the two input images depict the same person.
 
@@ -31,21 +49,3 @@ Given a pair of images as input, this network model outputs a similarity value i
   - Capture higher-order relationships by
     - Combining information from patches that are far from each other.
     - Combining information from M with information from M'.
-
-## The model structure
-<img src="./img/model-for-visualize.png">
-
-<table border="da">
-  <thead>
-    <tr>
-      <th>For Learning</th>
-      <th>For GradCAM</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><img src="./img/model-for-learning.png"></td>
-      <td><img src="./img/model-for-GradCAM.png"></td>
-    </tr>
-  </tbody>
-</table>
