@@ -8,12 +8,12 @@ Last week, I cultured E.coil and counted them. It was very boring and hard time 
 If we use a global value as threshold value, it will be strongly influenced by the shooting environment, so I use <b>different thresholds for different regions of the same image.</b> It gives us better results for images with varying illumination.
 
 ### Use `adaptiveThreshold` method in OpenCV.
-​
+
 | params          | role                                                                                 |
 |:--------------- |:------------------------------------------------------------------------------------ |
-| Adaptive Method | `cv.ADAPTIVE_THRESH_MEAN_C` or `cv.ADAPTIVE_THRESH_GAUSSIAN_C`                       |
-| Block Size      | It decides the size of neighbourhood area. (MUST A ODD NUMBER)                       |
-| C               | It is just a constant which is subtracted from the mean or weighted mean calculated. |
+| `Adaptive Method` | `cv.ADAPTIVE_THRESH_MEAN_C` or `cv.ADAPTIVE_THRESH_GAUSSIAN_C`                       |
+| `Block Size`      | It decides the size of neighbourhood area. (MUST A ODD NUMBER)                       |
+| `C`               | It is just a constant which is subtracted from the mean or weighted mean calculated. |
 
 ### Results
 
