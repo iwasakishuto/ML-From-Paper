@@ -4,6 +4,18 @@
 ## Papers
 - [Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization](https://arxiv.org/abs/1610.02391)
 
+## VGG16 structure
+<img src="https://neurohive.io/wp-content/uploads/2018/11/vgg16-1-e1542731207177.png">
+<summary>
+
+```python
+from keras.utils.vis_utils import plot_model
+plot_model(model, to_file="./img/model-VGG16.png", show_shapes=True)
+```
+
+<details><img src="./img/model-VGG16.png"></details>
+</summary>
+
 ## Overview
 1. 「予測への影響が大きいピクセル」をヒートマップを利用して可視化したい。
 2. 「ピクセル値に微小変化を加えたときに予測に生じる変化の大きさ」が、「予測への影響の大きさ」を表せるのでは？
