@@ -8,9 +8,9 @@
 
 ## Overview
 These days, deep learning techniques have yielded signigiacant improvements in image inpainting. However, many of these are commonly <b>over-smoothed and/or blurry.</b> This paper proposed a new approach combining two models.
-1. Edge generation
+1. <b>Edge generation</b><br>
 is solely focused on hallucinating edges in the missing regions.
-2. Image completion
+2. <b>Image completion</b><br>
 uses the hallucinated edges and estimates RGB pixel intensities of the missing regions.
 
 These approach of "lines first, color next" is partly inspired by understanding of how artists work.
