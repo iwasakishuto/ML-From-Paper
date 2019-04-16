@@ -21,9 +21,9 @@ If we use a global value as threshold value, it will be strongly influenced by t
 ​
 | params          | role                                                                                 |
 |:--------------- |:------------------------------------------------------------------------------------ |
-| Adaptive Method | `cv.ADAPTIVE_THRESH_MEAN_C` or `cv.ADAPTIVE_THRESH_GAUSSIAN_C`                       |
-| Block Size      | It decides the size of neighbourhood area. (MUST A ODD NUMBER)                       |
-| C               | It is just a constant which is subtracted from the mean or weighted mean calculated. |
+| `Adaptive Method` | `cv.ADAPTIVE_THRESH_MEAN_C` or `cv.ADAPTIVE_THRESH_GAUSSIAN_C`                       |
+| `Block Size`      | It decides the size of neighbourhood area. (MUST A ODD NUMBER)                       |
+| `C`               | It is just a constant which is subtracted from the mean or weighted mean calculated. |
 
 #### Results
 
