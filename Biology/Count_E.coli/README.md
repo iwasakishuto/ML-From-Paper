@@ -11,10 +11,11 @@ Last week, I cultured E.coil and counted them. It was very boring and hard time 
 
 ## The model structure
 <img src="./img/model-for-visualize.png">
+
 ## Overview
 
 ## Other methods for E.coil Counter
-### Approach 1: threshold
+### 【Approach 1】threshold
 If we use a global value as threshold value, it will be strongly influenced by the shooting environment, so I use <b>different thresholds for different regions of the same image.</b> It gives us better results for images with varying illumination.
 
 #### Use `adaptiveThreshold` method in OpenCV.
@@ -47,7 +48,7 @@ $ python Count-by-threshold.py \
 --C 2
 ```
 
-### Approach 2: K-means
+### 【Approach 2】K-means
 Apply image segmentation by K-means to distinguish the E.coil's region or not.
 1. Examine E.coil's color(BGR) in the image (I used [Digital Color Meter](https://support.apple.com/guide/digital-color-meter/welcome/mac)).
 2. Apply K-means segmentation to the image.
