@@ -1,13 +1,23 @@
-# E.coil's Counter
-Last week, I cultured E.coil and counted them. It was very boring and hard time for me to count too small and many colonies. Tha's why I applied Machine Learning and made "E.coil's Counter."
+# U-Net
+<b>\~Convolutional Networks for Biomedical Image Segmentation\~</b>
+
+## Motivations
+Last week, I cultured E.coil and counted them. It was very boring and hard time for me to count too small and many colonies. Tha's why I applied Machine Learning and made "E.coil Counter."
 
 <img src="./img/E.coil.png">
 
-# Method
-## Approach 1: threshold
+## Papers
+[U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)
+
+## The model structure
+<img src="./img/model-for-visualize.png">
+## Overview
+
+## Other methods for E.coil Counter
+### Approach 1: threshold
 If we use a global value as threshold value, it will be strongly influenced by the shooting environment, so I use <b>different thresholds for different regions of the same image.</b> It gives us better results for images with varying illumination.
 
-### Use `adaptiveThreshold` method in OpenCV.
+#### Use `adaptiveThreshold` method in OpenCV.
 ​
 | params          | role                                                                                 |
 |:--------------- |:------------------------------------------------------------------------------------ |
@@ -15,7 +25,7 @@ If we use a global value as threshold value, it will be strongly influenced by t
 | Block Size      | It decides the size of neighbourhood area. (MUST A ODD NUMBER)                       |
 | C               | It is just a constant which is subtracted from the mean or weighted mean calculated. |
 
-### Results
+#### Results
 
 | Block Size | Number of Colonies | image |
 | ---------- | ------------------ | ----- |
@@ -27,7 +37,7 @@ If we use a global value as threshold value, it will be strongly influenced by t
 
 There is no meaning about colors.
 
-### How to use?
+#### How to use?
 
 ```sh
 $ python Count-by-threshold.py \
@@ -37,14 +47,14 @@ $ python Count-by-threshold.py \
 --C 2
 ```
 
-## Approach 2: K-means
+### Approach 2: K-means
 Apply image segmentation by K-means to distinguish the E.coil's region or not.
 1. Examine E.coil's color(BGR) in the image (I used [Digital Color Meter](https://support.apple.com/guide/digital-color-meter/welcome/mac)).
 2. Apply K-means segmentation to the image.
 3. Change the cluster's color closest to the E.colis' to white, and the others' to black.
 4. Distinguish E.coils or not.
 
-### Results
+#### Results
 | K   | Number of Colonies | image |
 | --- | ------------------ | ----- |
 | 5   | 155                |<img src="./img/5-means-155-E.coil.png">       |
@@ -52,7 +62,7 @@ Apply image segmentation by K-means to distinguish the E.coil's region or not.
 | 15  | 86                 |<img src="./img/15-means-86-E.coil.png">       |
 | 20  | 75                 |<img src="./img/20-means-75-E.coil.png">       |
 
-## How to use?
+### How to use?
 
 ```sh
 $ python Count-by-K-means.py img/E.coil.png \
@@ -62,5 +72,5 @@ $ python Count-by-K-means.py img/E.coil.png \
 --RGB 222.219.203
 ```
 
-## Reference
+### Reference
 [Image Thresholding — OpenCV-Python Tutorials 1 documentation](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_thresholding/py_thresholding.html)
