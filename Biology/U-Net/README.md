@@ -19,7 +19,7 @@ Last week, I cultured E.coil and counted them. It was very boring and hard time 
 If we use a global value as threshold value, it will be strongly influenced by the shooting environment, so I use <b>different thresholds for different regions of the same image.</b> It gives us better results for images with varying illumination.
 
 #### Use `adaptiveThreshold` method in OpenCV.
-​
+
 | params          | role                                                                                 |
 |:--------------- |:------------------------------------------------------------------------------------ |
 | `Adaptive Method` | `cv.ADAPTIVE_THRESH_MEAN_C` or `cv.ADAPTIVE_THRESH_GAUSSIAN_C`                       |
@@ -48,7 +48,7 @@ $ python Count-by-threshold.py \
 --C 2
 ```
 
-### 【Approach 2】K-means
+### 【Approach 2】K-means
 Apply image segmentation by K-means to distinguish the E.coil's region or not.
 1. Examine E.coil's color(BGR) in the image (I used [Digital Color Meter](https://support.apple.com/guide/digital-color-meter/welcome/mac)).
 2. Apply K-means segmentation to the image.
