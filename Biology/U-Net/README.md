@@ -7,12 +7,16 @@ Last week, I cultured E.coil and counted them. It was very boring and hard time 
 <img src="./img/E.coil.png">
 
 ## Papers
-[U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)
+- [U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)
+- [Automatic hemolysis identification on aligned dual-lighting images of cultured blood agar plates](https://www.sciencedirect.com/science/article/pii/S0169260717307113)
 
 ## The model structure
 <img src="./img/model-for-visualize.png">
 
 ## Overview
+
+## Datasets
+- [MicrobIA Haemolysis Dataset](http://www.microbia.org/index.php/resources)
 
 ## Other methods for E.coil Counter
 ### 【Approach 1】threshold
