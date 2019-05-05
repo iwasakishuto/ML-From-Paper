@@ -21,6 +21,17 @@ Now that we have a <b>vector e that captures the meaning of the input sequence</
 
 With the seq2seq model, by <b>encoding many inputs into one vector</b>, and <b>decoding from one vector into many outputs</b>, we are freed from the constraints of sequence order and length. The encoded sequence is represented by a single vector, a single point in some N dimensional space of sequences. In an ideal case, <b>this point can be considered the "meaning" of the sequence.</b>
 
+## Training
+> In the first step, it seems likely to happen that the model mistranslate at the beginning of the sentence. Then, it would be mess up the entire sequence, and the model will hardly learn anything.
+
+If we use the predicted token as input to the next step during training, <b>errors would accumulate</b> and the model would rarely be exposed to the correct distribution of inputs, making training slow or impossible. To speedup things, one trick is to feed the actual output sequence (`<sos>`, `comment`, `vas`, `tu` ) into the decoder's LSTM and predict the next token at every position (`comment`, `vas`, `tu`, `<eos>`)
+
+<div align="center"><img src="./img/speedup-training.svg"></div>
+
+## Beam Search
+There indeed are 2 main ways of performing decoding at testing time. The first of these methods is <b>greedy decoding.</b> It is the most natural way and it consists in feeding to the next step the most likely word predicted at the previous step. It is very intuitive and easy, but even after training, it can happen that the model makes a small error. This would mess up the entire decoding.
+
+That's why there is another way of performing decoding, called <b>Beam Search.</b> Instead of only predicting the token with the best score, we keep track of "k" hypotheses. At each new time step, for these "k" hypotheses we have V new possible tokens. it makes a total of "kV" new hypotheses. Then, only keep the "k" best ones, and so on. We finally chose the highest score set.
+
 ## Reference
 - [Seq2Seq with Attention and Beam Search](https://guillaumegenthial.github.io/sequence-to-sequence.html)
-- da
