@@ -18,8 +18,6 @@ $ python visualize_embeddings.py --model_dir params/batch_all_1ch \
 |`batch_hard_vgg_no_training`|`batch_all_vgg_5step`|
 |<img src="visualize/batch_hard_vgg_no_training.png">|<img src="visualize/batch_all_vgg_5step.png">|
 
-batch_hard_1ch_8step
-
 ### Why not softmax??
 |softmax cross entropy|triplet loss|
 |:--|:--|
