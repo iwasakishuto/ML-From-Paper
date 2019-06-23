@@ -32,10 +32,10 @@ def build_model(is_training, images, params):
                 out = tf.layers.batch_normalization(out, momentum=bn_momentum, training=is_training)
             out = tf.nn.relu(out) # shape = (?,28,28,32), (?, 14, 14, 64)
             out = tf.layers.max_pooling2d(out, 2, 2) # shape= (?, 14, 14, 32), (?, 7, 7, 64)
+    size = params.image_size//2//2
+    assert out.shape[1:] == [size, size, num_channels * 2] 
 
-    assert out.shape[1:] == [7, 7, num_channels * 2]
-
-    out = tf.reshape(out, [-1, 7 * 7 * num_channels * 2])
+    out = tf.reshape(out, [-1, size * size * num_channels * 2])
     with tf.variable_scope('fc_1'):
         out = tf.layers.dense(out, params.embedding_size)
 
@@ -65,9 +65,7 @@ def model_fn(features, labels, mode, params):
 
     # define the layers of the model
     with tf.variable_scope('model'):
-        # model = build_model(is_training, images, params)
-        # embeddings = model(images)
-        embeddings = build_model(is_training, images, params) # Compute the embeddings shape = (?,64)
+        embeddings = build_model(is_training, images, params)
     embedding_mean_norm = tf.reduce_mean(tf.norm(embeddings, axis=1))
     tf.compat.v1.summary.scalar("embedding_mean_norm", embedding_mean_norm)
 
