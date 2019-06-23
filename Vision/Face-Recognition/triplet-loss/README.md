@@ -2,9 +2,23 @@
 In face recognition domain, triplet loss is very powerful and [FaceNet](https://arxiv.org/abs/1503.03832) achieved state-of-the-art performance using only 128-bytes per face!! I wanted to try it for long, so here we go :)
 
 ### Sample embeddings
+```python
+# training
+$ python train.py --model_dir params/batch_all_1ch --data_dir data
+# visualization
+$ python visualize_embeddings.py --model_dir params/batch_all_1ch \
+                                 --data_dir data \
+                                 --title batch_all_1ch
+```
+
 |before training|after training|
 |:--:|:--:|
-|<img src="visualize/before.png">|<img src="visualize/after.png">|
+|`batch_hard_1ch_8step`|`batch_all_1ch_8step`|
+|<img src="visualize/batch_hard_1ch_8step.png">|<img src="visualize/batch_all_1ch_8step.png">|
+|`batch_hard_vgg_no_training`|`batch_all_vgg_5step`|
+|<img src="visualize/batch_hard_vgg_no_training">|<img src="visualize/batch_all_vgg_5step">|
+
+batch_hard_1ch_8step
 
 ### Why not softmax??
 |softmax cross entropy|triplet loss|
