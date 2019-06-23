@@ -21,28 +21,26 @@ def input_fn(data_dir, params):
     all_image_paths = [os.path.join(data_dir, label, filename) for label in label_names for filename in os.listdir(os.path.join(data_dir, label)) if valid_image_filename(filename)]
     all_image_labels = [label2id[label] for label in label_names for filename in os.listdir(os.path.join(data_dir, label)) if valid_image_filename(filename)]
     
+    load_and_preprocess_image = lambda x: preprocess_image(tf.io.read_file(x), params)
+
     path_ds = tf.data.Dataset.from_tensor_slices(all_image_paths)
     image_ds = path_ds.map(load_and_preprocess_image)
     label_ds = tf.data.Dataset.from_tensor_slices(tf.cast(all_image_labels, tf.int32))
     
     dataset = tf.data.Dataset.zip((image_ds, label_ds))
     
-    dataset = dataset.shuffle(params.train_size)  # whole dataset into the buffer
+    dataset = dataset.shuffle(params.shuffle_buff_size)  # whole dataset into the buffer
     dataset = dataset.repeat(params.num_epochs)  # repeat for multiple epochs
     dataset = dataset.batch(params.batch_size)
     dataset = dataset.prefetch(1)  # make sure you always have one batch ready to serve
     return dataset
 
-def preprocess_image(image):
-    image = tf.image.decode_jpeg(image, channels=1)
-    image = tf.image.resize(image, [28, 28])
+def preprocess_image(image, params):
+    # image = tf.image.decode_jpeg(image, channels=1) # shape=(?,?,1)
+    image = tf.image.decode_jpeg(image, channels=params.input_channels) # shape=(?,?,3)
+    image = tf.image.resize(image, [params.image_size, params.image_size])
     image /= 255.0  # normalize to [0,1] range
-
     return image
-
-def load_and_preprocess_image(path):
-    image = tf.io.read_file(path)
-    return preprocess_image(image)
 
 def test_input_fn(data_dir, params):
     label_names = [par for par in os.listdir(data_dir) if valid_image_directory(par)]
@@ -50,6 +48,8 @@ def test_input_fn(data_dir, params):
     
     all_image_paths = [os.path.join(data_dir, label, filename) for label in label_names for filename in os.listdir(os.path.join(data_dir, label)) if valid_image_filename(filename)]
     all_image_labels = [label2id[label] for label in label_names for filename in os.listdir(os.path.join(data_dir, label)) if valid_image_filename(filename)]
+
+    load_and_preprocess_image = lambda x: preprocess_image(tf.io.read_file(x), params)
     
     path_ds = tf.data.Dataset.from_tensor_slices(all_image_paths)
     image_ds = path_ds.map(load_and_preprocess_image)
