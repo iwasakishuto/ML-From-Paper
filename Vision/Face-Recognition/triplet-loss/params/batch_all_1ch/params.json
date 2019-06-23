@@ -7,14 +7,13 @@
     "use_batch_norm": false,
     "bn_momentum": 0.9,
     "margin": 0.5,
-    "embedding_size": 64,
+    "embedding_size": 128,
     "triplet_strategy": "batch_all",
     "squared": false,
 
-    "image_size": 28,
-    "num_labels": 10,
-    "train_size": 50000,
-    "eval_size": 10000,
+    "input_channels": 1,
+    "image_size": 256,
+    "shuffle_buff_size": 50000,
 
     "num_parallel_calls": 4,
     "save_summary_steps": 50
