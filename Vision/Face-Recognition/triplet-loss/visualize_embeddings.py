@@ -10,7 +10,8 @@ import tensorflow as tf
 
 from model.utils import Params
 from model.input_fn import test_input_fn
-from model.model_fn import model_fn
+from model.model_fn import model_fn # For 1ch images
+from model.vgg_model_fn import vgg_model_fn # For 3ch images
 
 from mpl_toolkits.mplot3d import proj3d
 from sklearn.decomposition import PCA
@@ -51,10 +52,12 @@ if __name__ == '__main__':
 
     #=== Define the model ===
     tf.logging.info("Creating the model...")
+    model = model_fn if params.input_channels == 1 else vgg_model_fn
+
     config = tf.estimator.RunConfig(tf_random_seed=230,
                                     model_dir=args.model_dir,
                                     save_summary_steps=params.save_summary_steps)
-    estimator = tf.estimator.Estimator(model_fn, params=params, config=config)
+    estimator = tf.estimator.Estimator(model, params=params, config=config)
 
     #=== Prediction and calculate embeddings ===
     tf.logging.info("Predicting...")
