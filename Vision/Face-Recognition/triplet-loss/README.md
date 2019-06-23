@@ -2,7 +2,7 @@
 In face recognition domain, triplet loss is very powerful and [FaceNet](https://arxiv.org/abs/1503.03832) achieved state-of-the-art performance using only 128-bytes per face!! I wanted to try it for long, so here we go :)
 
 ### Sample embeddings
-```python
+```sh
 # training
 $ python train.py --model_dir params/batch_all_1ch --data_dir data
 # visualization
@@ -16,7 +16,7 @@ $ python visualize_embeddings.py --model_dir params/batch_all_1ch \
 |`batch_hard_1ch_8step`|`batch_all_1ch_8step`|
 |<img src="visualize/batch_hard_1ch_8step.png">|<img src="visualize/batch_all_1ch_8step.png">|
 |`batch_hard_vgg_no_training`|`batch_all_vgg_5step`|
-|<img src="visualize/batch_hard_vgg_no_training">|<img src="visualize/batch_all_vgg_5step">|
+|<img src="visualize/batch_hard_vgg_no_training.png">|<img src="visualize/batch_all_vgg_5step.png">|
 
 batch_hard_1ch_8step
 
