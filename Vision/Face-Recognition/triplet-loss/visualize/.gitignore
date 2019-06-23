@@ -1,4 +1,6 @@
 *
 !.gitignore
-!after.png
-!before.png
+!batch_hard_vgg_no_training.png
+!batch_all_vgg_5step.png
+!batch_all_1ch_8step.png
+!batch_hard_1ch_8step.png
