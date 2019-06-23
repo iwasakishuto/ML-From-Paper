@@ -15,7 +15,7 @@ from model.utils import Params
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_dir', default='logger/base_model',
+parser.add_argument('--model_dir', default='params/batch_all',
                     help="Experiment directory containing params.json")
 parser.add_argument('--data_dir', default='data/',
                     help="Directory containing the dataset")
@@ -48,15 +48,3 @@ if __name__ == '__main__':
     res = estimator.evaluate(lambda: test_input_fn(args.data_dir, params))
     for key in res:
         print("{}: {}".format(key, res[key]))
-
-    #==========================
-    tf.logging.info("Predicting")
-    predictions = estimator.predict(lambda: test_input_fn(args.data_dir, params))
-
-    # TODO (@omoindrot): remove the hard-coded 10000
-    embeddings = np.zeros((25, params.embedding_size))
-    for i, p in enumerate(predictions):
-        embeddings[i] = p['embeddings']
-        print(i)
-    
-    np.save("hoge_vectors.npy", embeddings)
