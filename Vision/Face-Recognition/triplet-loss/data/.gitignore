@@ -1,6 +1,12 @@
+# For all training data
 /*/*
+
+# EXCEPTION
 !Jun_Matsumoto/*
 !Kazunari_Ninomiya/*
 !Masaki_Aiba/*
 !Satoshi_Ohno/*
 !Sho_Sakurai/*
+
+# Jupyter notebook
+.ipynb_checkpoints
