@@ -31,11 +31,11 @@ if __name__ == '__main__':
     # Define the model
     tf.logging.info("Loading the model structure...")
     if params.model == "resnet_v2":
-        from model.resnet_v2_model_fn import resnet_v2_model_fn as model
-    elif params.model == "vgg":
-        from model.vgg_model_fn import vgg_model_fn as model
+        from model.model_fn_resnet_v2 import resnet_v2_model_fn as model
+    elif params.model == "vgg16":
+        from model.model_fn_vgg16 import vgg16_model_fn as model
     elif params.model == "mono":
-        from model.model_fn import model_fn as model
+        from model.model_fn_mono import mono_model_fn as model
     else:
         tf.logging.info("Your model name {} couldn't understand.".format(params.model))
 
