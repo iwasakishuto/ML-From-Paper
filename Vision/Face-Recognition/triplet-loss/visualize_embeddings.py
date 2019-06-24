@@ -10,8 +10,6 @@ import tensorflow as tf
 
 from model.utils import Params
 from model.input_fn import test_input_fn
-from model.model_fn import model_fn # For 1ch images
-from model.vgg_model_fn import vgg_model_fn # For 3ch images
 
 from mpl_toolkits.mplot3d import proj3d
 from sklearn.decomposition import PCA
@@ -32,7 +30,7 @@ parser.add_argument('--model_dir', default='params/batch_all',
                     help="Experiment directory containing params.json and model weight.")
 parser.add_argument('--data_dir', default='data/',
                     help="Directory containing the dataset")
-parser.add_argument('--save_filename', default='visualize/embedding-space{}.png'.format(datetime.now().isoformat(timespec='seconds')),
+parser.add_argument('--save_filename', default='embedding-space{}'.format(datetime.now().isoformat(timespec='seconds')),
                     help="The file name of plot images.")
 parser.add_argument('--color_seed', default=111, help="The random seed for plot colors.")
 parser.add_argument('--title', default="Embedding space", help="Title for embedding space.")
@@ -50,10 +48,22 @@ if __name__ == '__main__':
     assert os.path.isfile(json_path), "No json configuration file found at {}".format(json_path)
     params = Params(json_path)
 
-    #=== Define the model ===
-    tf.logging.info("Creating the model...")
-    model = model_fn if params.input_channels == 1 else vgg_model_fn
+    #=== Check whether there is directory === 
+    assert os.path.isdir("visualize"), "Please make {}.".format(os.path.join(os.getcwd(), "visualize"))
+    filename = os.path.join("visualize", args.save_filename) + ".png"
 
+    #=== Define the model ===
+    tf.logging.info("Loading the model structure...")
+    if params.model == "resnet_v2":
+        from model.model_fn_resnet_v2 import resnet_v2_model_fn as model
+    elif params.model == "vgg16":
+        from model.model_fn_vgg16 import vgg16_model_fn as model
+    elif params.model == "mono":
+        from model.model_fn_mono import mono_model_fn as model
+    else:
+        tf.logging.info("Your model name {} couldn't understand.".format(params.model))
+
+    tf.logging.info("Creating the model...")
     config = tf.estimator.RunConfig(tf_random_seed=230,
                                     model_dir=args.model_dir,
                                     save_summary_steps=params.save_summary_steps)
@@ -64,6 +74,7 @@ if __name__ == '__main__':
     predictions = estimator.predict(lambda: test_input_fn(args.data_dir, params))
     embeddings = [p['embeddings'] for p in predictions]
     tf.logging.info("data num: {}".format(len(embeddings)))
+    tf.logging.info("embedding shape: {}".format(embeddings[0].shape))
 
     #=== meta data for images ===
     label_names = [par for par in os.listdir(args.data_dir) if valid_image_directory(par)]
@@ -93,5 +104,5 @@ if __name__ == '__main__':
         ax.scatter([X[0]], [X[1]], [X[2]], marker="o", linestyle='None', color=color, s=100)
 
     plt.title(args.title, fontsize=30)
-    plt.savefig(args.save_filename)
+    plt.savefig(filename)
     tf.logging.info("Completed.")
