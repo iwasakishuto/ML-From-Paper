@@ -56,6 +56,8 @@ if __name__ == '__main__':
     tf.logging.info("Loading the model structure...")
     if params.model == "resnet_v2":
         from model.model_fn_resnet_v2 import resnet_v2_model_fn as model
+    elif params.model == "resnet_v1":
+        from model.model_fn_resnet_v1 import resnet_v1_model_fn as model
     elif params.model == "vgg16":
         from model.model_fn_vgg16 import vgg16_model_fn as model
     elif params.model == "mono":
