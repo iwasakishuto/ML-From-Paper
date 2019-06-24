@@ -97,10 +97,8 @@ def build_resnet_v2_model(is_training, images, params, reuse=None, scope='Incept
       logits: the logits outputs of the model.
     """  
     with tf.variable_scope(scope, 'InceptionResnetV2', [images], reuse=reuse):
-        with slim.arg_scope([slim.batch_norm, slim.dropout],
-                            is_training=is_training):
-            with slim.arg_scope([slim.conv2d, slim.max_pool2d, slim.avg_pool2d],
-                                stride=1, padding='SAME'):
+        with slim.arg_scope([slim.batch_norm, slim.dropout], is_training=is_training):
+            with slim.arg_scope([slim.conv2d, slim.max_pool2d, slim.avg_pool2d], stride=1, padding='SAME'):
       
                 # 149 x 149 x 32
                 net = slim.conv2d(images, 32, 3, stride=2, padding='VALID', scope='Conv2d_1a_3x3')
@@ -131,16 +129,14 @@ def build_resnet_v2_model(is_training, images, params, reuse=None, scope='Incept
                     with tf.variable_scope('Branch_3'):
                         tower_pool = slim.avg_pool2d(net, 3, stride=1, padding='SAME', scope='AvgPool_0a_3x3')
                         tower_pool_1 = slim.conv2d(tower_pool, 64, 1, scope='Conv2d_0b_1x1')
-                    net = tf.concat([tower_conv, tower_conv1_1,
-                                        tower_conv2_2, tower_pool_1], 3)
+                    net = tf.concat([tower_conv, tower_conv1_1, tower_conv2_2, tower_pool_1], 3)
         
                 net = slim.repeat(net, 10, block35, scale=0.17)
         
                 # 17 x 17 x 1024
                 with tf.variable_scope('Mixed_6a'):
                     with tf.variable_scope('Branch_0'):
-                        tower_conv = slim.conv2d(net, 384, 3, stride=2, padding='VALID',
-                                                 scope='Conv2d_1a_3x3')
+                        tower_conv = slim.conv2d(net, 384, 3, stride=2, padding='VALID', scope='Conv2d_1a_3x3')
                     with tf.variable_scope('Branch_1'):
                         tower_conv1_0 = slim.conv2d(net, 256, 1, scope='Conv2d_0a_1x1')
                         tower_conv1_1 = slim.conv2d(tower_conv1_0, 256, 3, scope='Conv2d_0b_3x3')
