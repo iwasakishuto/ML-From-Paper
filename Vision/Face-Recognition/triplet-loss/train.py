@@ -3,15 +3,12 @@ Train the model
 CREDIT: https://github.com/omoindrot/
 """
 import os
-import numpy as np #hogehoge
 import argparse
 
 import tensorflow as tf
 
 from model.input_fn import input_fn
 from model.input_fn import test_input_fn
-from model.model_fn import model_fn # For 1ch images
-from model.vgg_model_fn import vgg_model_fn # For 3ch images
 from model.utils import Params
 
 parser = argparse.ArgumentParser()
@@ -31,9 +28,18 @@ if __name__ == '__main__':
     assert os.path.isfile(json_path), "No json configuration file found at {}".format(json_path)
     params = Params(json_path)
 
-    model = model_fn if params.input_channels == 1 else vgg_model_fn
-
     # Define the model
+    tf.logging.info("Loading the model structure...")
+    if params.model == "resnet_v2":
+        from model.resnet_v2_model_fn import resnet_v2_model_fn as model
+    elif params.model == "vgg":
+        from model.vgg_model_fn import vgg_model_fn as model
+    elif params.model == "mono":
+        from model.model_fn import model_fn as model
+    else:
+        tf.logging.info("Your model name {} couldn't understand.".format(params.model))
+
+    # Setting model for training
     tf.logging.info("Creating the model...")
     config = tf.estimator.RunConfig(tf_random_seed=230,
                                     model_dir=args.model_dir,
