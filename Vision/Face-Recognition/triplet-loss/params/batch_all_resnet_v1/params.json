@@ -1,0 +1,25 @@
+{
+    "model": "resnet_v1",
+
+    "input_channels": 3,
+    "image_size": 224,
+    "embedding_size": 128,
+
+    "dropout_keep_prob": 0.8,
+    "weight_decay": 0.0,
+    "learning_rate": 1e-3,
+    "bn_momentum": 0.9,
+    "batch_size": 64,
+    "num_epochs": 20,
+    
+    "use_batch_norm": false,
+    
+    "triplet_strategy": "batch_all",
+    "margin": 0.5,
+    "squared": false,
+
+    "shuffle_buff_size": 50000,
+
+    "num_parallel_calls": 4,
+    "save_summary_steps": 50
+}
