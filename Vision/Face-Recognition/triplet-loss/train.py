@@ -38,6 +38,8 @@ if __name__ == '__main__':
         from model.model_fn_vgg16 import vgg16_model_fn as model
     elif params.model == "mono":
         from model.model_fn_mono import mono_model_fn as model
+    elif params.model == "inception_v3":
+        from model.model_fn_inception_v3 import inception_v3_model_fn as model
     else:
         tf.logging.info("Your model name {} couldn't understand.".format(params.model))
 
